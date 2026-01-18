@@ -1,0 +1,6 @@
+
+### User Statistics Endpoint
+GET http://localhost:8000/analytics/user/696b8e46f31826b368b4e349
+
+### Productivity Trend Endpoint
+GET http://localhost:8000/analytics/productivity/696b8e46f31826b368b4e349?from=2026-01-01&to=2026-01-31

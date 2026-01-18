@@ -1,0 +1,71 @@
+
+@BASEURL = http://localhost:5000
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTZiOGU0NmYzMTgyNmIzNjhiNGUzNDkiLCJpYXQiOjE3Njg3MjIwNTMsImV4cCI6MTc2OTMyNjg1M30.m1Dn9y8SD3NmVC3Lpi7FszJCG283nlXBDGgbAHfJkkk
+@taskId = 696c72804675deaa4f16bd25
+### AuthRegister
+
+POST {{BASEURL}}/api/auth/register
+Content-Type: application/json
+
+{
+    "username": "PrasannaKumar",
+    "email": "prasanna@quicktask.com",
+    "password": "Prasanna@123"
+}
+
+### Login
+
+POST {{BASEURL}}/api/auth/login
+Content-Type: application/json
+
+{
+    "email": "prasanna@quicktask.com",
+    "password": "Prasanna@123"
+}
+
+
+### create Task 
+
+POST {{BASEURL}}/api/tasks
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "title": "Finished Python",
+    "description": "Complete task APIs and testing",
+    "priority": "High",
+    "status": "Completed",
+    "dueDate": "2026-01-26"
+}
+
+
+### Get All Tasks
+
+GET {{BASEURL}}/api/tasks
+Authorization: Bearer {{token}}
+
+
+### FILTER + SEARCH + SORT
+
+GET {{BASEURL}}/api/tasks?status=In%20progress&priority=High&search=Quick&sortBy=dueDate
+Authorization: Bearer {{token}}
+
+### Get Task By Id
+
+GET {{BASEURL}}/api/tasks/{{taskId}}
+Authorization: Bearer {{token}}
+
+### Update Task
+
+PUT {{BASEURL}}/api/tasks/{{taskId}}
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "status": "Completed"
+}
+
+### Delete Task
+
+DELETE {{BASEURL}}/api/tasks/{{taskId}}
+Authorization: Bearer {{token}}
