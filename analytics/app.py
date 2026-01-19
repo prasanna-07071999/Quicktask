@@ -1,10 +1,13 @@
 from flask import Flask, jsonify, request
+from flask_cors import CORS 
 from db import task_collection
 from bson import ObjectId
 from datetime import datetime
 import os
 
 app = Flask(__name__)
+
+CORS(app, origins=["http://localhost:5173"])
 
 @app.route("/analytics/user/<user_id>", methods=["GET"])
 def user_statistics (user_id):

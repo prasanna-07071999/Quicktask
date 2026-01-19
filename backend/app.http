@@ -1,7 +1,7 @@
 
 @BASEURL = http://localhost:5000
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTZiOGU0NmYzMTgyNmIzNjhiNGUzNDkiLCJpYXQiOjE3Njg3MjIwNTMsImV4cCI6MTc2OTMyNjg1M30.m1Dn9y8SD3NmVC3Lpi7FszJCG283nlXBDGgbAHfJkkk
-@taskId = 696c72804675deaa4f16bd25
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTZiOGU0NmYzMTgyNmIzNjhiNGUzNDkiLCJpYXQiOjE3Njg3NjEzOTksImV4cCI6MTc2OTM2NjE5OX0.tzV9PEKfIbuAHfrO4mppoNdxaz9rHuhNZW-Xmb6G8u0
+@taskId = 696b8e46f31826b368b4e349
 ### AuthRegister
 
 POST {{BASEURL}}/api/auth/register
@@ -69,3 +69,12 @@ Content-Type: application/json
 
 DELETE {{BASEURL}}/api/tasks/{{taskId}}
 Authorization: Bearer {{token}}
+
+### Update Status
+PATCH {{BASEURL}}/api/tasks/{{taskId}}/status
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "status": "Completed"
+}

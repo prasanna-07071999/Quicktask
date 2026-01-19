@@ -59,7 +59,7 @@ const login = async (req, res) => {
             process.env.JWT_SECRET, {expiresIn: "7d"}
         )
         
-        return res.json({token, user: {id: user._id, username: user.username, email: user.email}})
+        return res.json({token, userId: user._id, user: {id: user._id, username: user.username, email: user.email}})
 
     } catch (e){
         console.log('Login Error:', e)
