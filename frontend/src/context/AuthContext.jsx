@@ -22,6 +22,8 @@ export const AuthProvider = ({children}) => {
 
     
     const login = async (email, password) => {
+        console.log("LOGIN FUNCTION CALLED");
+        console.log("API_BASE_URL =", API_BASE_URL);
         const response = await fetch(`${API_BASE_URL}/auth/login`, {
             method: "POST",
             headers: {
@@ -30,7 +32,10 @@ export const AuthProvider = ({children}) => {
             body: JSON.stringify({ email, password }),
         });
 
+        console.log("FETCH RESPONSE =", response);
+
         const data = await response.json();
+        console.log("LOGIN RESPONSE DATA =", data);
 
         if (!response.ok) {
             throw new Error(data.message || "Login failed");
