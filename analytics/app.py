@@ -7,7 +7,7 @@ import os
 
 app = Flask(__name__)
 
-CORS(app, origins=["http://localhost:5173"])
+CORS(app, resources={r"/analytics/*": {"origins": "*"}})
 
 @app.route("/analytics/user/<user_id>", methods=["GET"])
 def user_statistics (user_id):
