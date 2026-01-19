@@ -9,31 +9,41 @@ export const AuthProvider = ({children}) => {
     const [loading, setLoading] = useState(true)
     
     useEffect(() => {
-        if (token){
-            setUser({})
+        if (token) {
+            const storedUser = localStorage.getItem("user");
+            if (storedUser) {
+            setUser(JSON.parse(storedUser));
+            }
+        } else {
+            setUser(null);
         }
-        setLoading(false)
-    }, [token])
+        setLoading(false);
+    }, [token]);
+
     
     const login = async (email, password) => {
-        const url = `${API_BASE_URL}/auth/login`
-        const options = {
+        const response = await fetch(`${API_BASE_URL}/auth/login`, {
             method: "POST",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({email, password})
-        }
-        const response = await fetch(url, options)
-        if (!response.ok){
-            throw new Error("Login Failed")
+            headers: {
+            "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email, password }),
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.message || "Login failed");
         }
 
-        const data = await response.json()
-        localStorage.setItem("token", data.token)
-        localStorage.setItem("userId", data.userId);
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("userId", data.user.id);
         localStorage.setItem("user", JSON.stringify(data.user));
 
-        setToken(data.token)
-    }
+        setToken(data.token);
+        setUser(data.user);
+    };
+
 
     const logout = () => {
         setToken(null);
